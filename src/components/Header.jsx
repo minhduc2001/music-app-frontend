@@ -14,7 +14,7 @@ function Header({ onSetCurrentView }) {
     const { user, handleLogout, dataSong } = useContext(Songs)
     // const [isSearch, setIsSearch] = useState(false)
     const [show, setShow] = useState(false);
-    const [onFocus, setOnFocus] = useState(true);
+    const [onFocus, setOnFocus] = useState(false);
     const [dataSearch, setDataSearch] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 

@@ -106,14 +106,13 @@ function Login() {
       toast.error('Please reload application!', toastOption);
       return;
     }
-
-    const data = await axios.post(registerRoute, userData)
-    if (!data.data.status) {
-      toast.error(data.data.msg, toastOption)
-    }
-    else {
+    try {
+      const data = await axios.post(registerRoute, userData);
       sendOTP(userData.phone)
+    } catch (error) {
+      toast.error(error.response.data.msg, toastOption)
     }
+
   }
 
   const handleSubmitLogin = async (e) => {
