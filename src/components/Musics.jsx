@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext } from 'react'
 import { useEffect } from 'react';
 import styled from 'styled-components'
 import { Songs } from '../Context'
-
+import { Box} from '@mui/material';
 function Musics() {
     const { dataSong, handleSetSong, song } = useContext(Songs);
     const [active, setActive] = useState('playlists');
@@ -42,7 +42,7 @@ function Musics() {
                 </div>
 
             </div>
-            <div className="list-musics">
+            <Box className="list-musics">
                 {dataSong?.map((music, index) => {
                     return (<div
                         // ref={scrollRef}
@@ -62,7 +62,7 @@ function Musics() {
                         </div>
                     </div>)
                 })}
-            </div>
+            </Box>
         </Container>
     )
 }
@@ -134,13 +134,13 @@ const Container = styled.div`
     }
     .list-musics{
         overflow: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        // display: flex;
+        // flex-direction: column;
+        // align-items: center;
+        // justify-content: center;
         margin-top: 75px;
         width: 100%;
-        height: 800px;
+        height: 750px;
         &::-webkit-scrollbar{
             width: 0.2rem;
             &-thumb{

@@ -11,18 +11,24 @@ import { useNavigate } from 'react-router-dom'
 
 import { loginSuccess } from '../redux/authSlice';
 import { createAxios } from '../createIntance'
+import { Backdrop } from '@mui/material'
+import CircularProgress from '@mui/material/CircularProgress';
+import loading from '../public/Ripple-1s-200px.gif'
 
 
 function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const [isLoading, setIsLoading] = useState(true);
+
     const reduxResponse = useSelector((state) => state.auth.login);
     const user = reduxResponse.currentUser;
 
-    let axiosJWT = createAxios(user,reduxResponse.accessToken, dispatch, loginSuccess);
+    let axiosJWT = createAxios(user, reduxResponse.accessToken, dispatch, loginSuccess);
 
     const dataSong = useSelector(state => state.music.musics?.songs)
-    const [song, setSong] = useState(dataSong[0])
+    const [song, setSong] = useState(dataSong?.[0])
 
     const handleSetSong = (idSong) => {
         const music = dataSong.find(song => song.id === idSong);
@@ -31,8 +37,12 @@ function Home() {
 
     useEffect(() => {
         if (!user) navigate('/login')
-        if (reduxResponse?.accessToken) getAllMusics(reduxResponse.accessToken, dispatch, axiosJWT);
+        if (reduxResponse?.accessToken) {
+            getAllMusics(reduxResponse.accessToken, dispatch, axiosJWT)
+        };
     }, [])
+
+    useEffect(() => { if(dataSong.length > 0) setIsLoading(false) }, [dataSong])
 
     const handleLogout = () => {
         logout(reduxResponse?.accessToken, dispatch, navigate, axiosJWT);
@@ -46,6 +56,11 @@ function Home() {
                 <Musics />
                 <Control />
             </Container>
+            <Backdrop
+                open={isLoading}
+            >
+                 <img src={loading} alt="loading" className="loading" style={{width: '50px'}}/>
+            </Backdrop>
         </Songs.Provider>
     )
 }

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import User from './User'
 import loading from '../public/Ripple-1s-200px.gif'
+import { AutoComplete } from '@mui/material'
 
 function Header({ onSetCurrentView }) {
     const { user, handleLogout, dataSong } = useContext(Songs)
@@ -31,7 +32,7 @@ function Header({ onSetCurrentView }) {
             setDataSearch(dataSong?.filter(song => song.name.toLowerCase().includes(e.target.value)));
             setIsLoading(false);
         }
-        else{
+        else {
             setIsLoading(true)
         }
         // else setDataSearch([])
@@ -39,7 +40,7 @@ function Header({ onSetCurrentView }) {
 
     return (
         <Container>
-            <div className="search">
+            <div className="search" onBlur={() => setOnFocus(false)}>
                 <Tippy
                     visible={onFocus}
                     interactive={true}
@@ -52,7 +53,7 @@ function Header({ onSetCurrentView }) {
                                     <h1 style={{ color: 'white' }}>Please Wait...</h1>
                                     <img src={loading} alt="loading" className="loading" />
                                 </div>) :
-                                (<MusicItem dataSearch={dataSearch} onFocus={setOnFocus}/>)}
+                                (<MusicItem dataSearch={dataSearch} onFocus={setOnFocus} />)}
                         </div>
 
                     )}
@@ -61,22 +62,18 @@ function Header({ onSetCurrentView }) {
                         defaultValue=''
                         onChange={(e) => handleSearch(e)}
                         onFocus={() => setOnFocus(true)}
-                        // onBlur={() => setOnFocus(false)}
-                         />
+                    // onBlur={() => setOnFocus(false)}
+                    />
                 </Tippy>
             </div>
             <div className="options">
                 {user ? <h2>Hi {user?.name || user?.username}!</h2> : ''}
                 <ul>
-                    <li className='options-li'><a href=""></a></li>
-                    <li className='options-li'><a href=""></a></li>
-                    <li className='options-li'><a href=""></a></li>
-                    <li className='options-li'><a href=""></a></li>
                     <Tippy
                         onClickOutside={() => setShow(false)}
                         visible={show === true}
                         interactive={true}
-                        placement='bottom-end'
+                        placement='bottom'
                         render={attrs => (
                             <div className="option" tabIndex="-1" {...attrs}>
                                 <User handleLogout={handleLogout} onSetCurrentView={onSetCurrentView}></User>

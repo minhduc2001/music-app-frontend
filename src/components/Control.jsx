@@ -5,7 +5,6 @@ import 'react-h5-audio-player/lib/styles.css';
 import { Songs } from '../Context'
 function Control() {
     const { dataSong, handleSetSong, song } = useContext(Songs)
-
     const handleClickPrevious = () => {
         handleSetSong(song.id === 0 ? dataSong[dataSong.length - 1].id : song.id - 1)
     }
@@ -16,6 +15,9 @@ function Control() {
     const handleEnded = () => {
         handleSetSong(song.id === dataSong[dataSong.length - 1].id ? 0 : song.id + 1)
     }
+    useEffect(() => {
+        console.log('re-render');
+    },[song])
     return (
 
         <Container>

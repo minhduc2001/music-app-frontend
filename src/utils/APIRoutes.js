@@ -1,4 +1,4 @@
-export const host = 'http://localhost:5000';
+export const host = 'https://muruko.herokuapp.com';
 export const registerRoute = `${host}/api/auth/register`;
 export const loginRoute = `${host}/api/auth/login`;
 export const getAllMusicsRoute = `${host}/api/music`;
@@ -10,3 +10,6 @@ export const activeRoute = `${host}/api/auth/active`;
 export const passwordRoute = `${host}/api/auth/pw`;
 export const updateRoute = `${host}/api/users/user`;
 export const setAvatarRoute = `${host}/api/users/avatar`;
+export const addCmtRoute = `${host}/api/comment/add`;
+export const getCmtRoute = `${host}/api/comment/`;
+export const deleteCmtRoute = `${host}/api/comment/delete`;

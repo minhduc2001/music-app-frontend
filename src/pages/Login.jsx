@@ -14,7 +14,6 @@ import { Dialog, Typography, Box, TextField, Card, Button, Backdrop } from '@mui
 import CircularProgress from '@mui/material/CircularProgress';
 
 function Login() {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -96,6 +95,7 @@ function Login() {
   }
 
   const handleSubmitRegister = async (e) => {
+    setIsLoading(true)
     e.preventDefault();
     const userData = {
       username: values.username,
@@ -104,6 +104,7 @@ function Login() {
     }
     if (otp) {
       toast.error('Please reload application!', toastOption);
+      setIsLoading(false)
       return;
     }
     try {
@@ -111,6 +112,7 @@ function Login() {
       sendOTP(userData.phone)
     } catch (error) {
       toast.error(error.response.data.msg, toastOption)
+      setIsLoading(false)
     }
 
   }
@@ -142,8 +144,9 @@ function Login() {
   }
 
   useEffect(() => {
-    if (user) navigate('/')
+    if(user) navigate('/')
   }, [])
+
   const view = () => {
     switch (currentView) {
       case "signup":
