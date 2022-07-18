@@ -1,18 +1,12 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
-import { Songs } from '../Context'
-import Picker from "emoji-picker-react"
-import { IoMdFastforward, IoMdSend } from 'react-icons/io'
-import { BsEmojiSmileFill } from 'react-icons/bs'
-import { getCmtRoute, deleteCmtRoute, addCmtRoute } from '../utils/APIRoutes'
-import axios from 'axios'
 
 import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import { Box, Card, Backdrop, CircularProgress, Typography, CardMedia, CardContent } from '@mui/material';
+import { Box, Typography, CardMedia, CardContent } from '@mui/material';
 
 function Body() {
 
